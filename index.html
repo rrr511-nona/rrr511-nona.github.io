@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="勤怠">
+<meta name="theme-color" content="#1D9E75">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAEcklEQVR42u3dW24bSRAEQF6Ex/R1fFUt/GPAu9DCYotdVVkxyH+xs0LD1wz78Sg/nj9/yMt5bDmMGi5qaAJHfrAjmY7MhCN2OGJHBjlSOUT4SAEiHXOEj9QgUipE+EgNIkVChI+UIdKf4CM1iNQmB4gUJmeItCUHglQlZ4j0JAeClCRniDQkB4LUI2eIdCMHghTzOx+fH8r5HBEpJwdBawR9vP9YKYgams4QgYMSQS3hBFNKFPQx58gSxA5HZ4jYeWGeHM0X1G1uCx2NFdR/SksczRQ0ayzZiKYJmjuNVEejBGXUH4ZojqCwf92Y5UwQFPxeJmBpKXw2fJ7VGJFqrTRR0MJvu4cuuaWgtdfdTFx4P0GuAJzVQDNB+IzroZMgfCa20UYQPkM76SEIn7nNNBCEz+h+qgXhM72l3oLY6V9UqSB8AuqqE4RPRmlFgvCJqa6fIEZmtVchCJ+kDq8L8vwVVmMnQVxMbPKuIHzy+iSIoDGC8IlstYEgCkYXe0uQE1Bqt9WCzH96vVcEOQEFN1wqyOQDSn6/ICeg7NNQnSAz/5+WBlVNUNCzT6IgT2E3vyAtabtIEDtvukWeIHYIqlyN31G8X3uKoP5nums/50pQ3HWPl3+aPF3QoFelVXbOH22EoPKnsHJEhRsj3Gxgk6Brjso31SCo64vU/nbSBQXPrdu+UMMFFX4SVDK9hntBXfuLKYKqJtl2HzGC2jtqvgcdQY1flXR7yUPQqJNRfzu5gmZ9qfDfBzzFzuUpLBB0/tQzzg5BEYh6rneCoOZXlW2wc3MQ+wS91dHCO8i2CnoHop33IC4W9I2ONt/Ful7Q0HfqBG29DJ6g9Dt8YvgQRBBBU+8yzOAzWdCIu7deRjR9Fb7VyKqfoNz6A+L6IHF9EEEEEUQQQQQRJNsEeTu259OIiPvmpbB8gggiSCIFeSm05CuZrN9yladf4hSCCCIIInwIIihbEEQxbdtfzAmIINkpCKKMnu317AQ0WBBEAQ1fEeQ0FFxvtSCIpnd7S5DTUGqxDQRBNLrVi4IgiuyTIIImCYIor8lOgiCaWON1QU5DYR1WCIIoqb1+giCaVV2RIIhiSqsTBFFGXaWCIAooqrcgiPq3VC0Ioun9NBAE0ehmegiCaG4nbQRBNLSNToIgmthDM0EQjWugn6Dn323RtNNOw4W3FLQT0dAldxX0zNosLnilj1+Haq3xgE9nQc+v7J6baqfz0iYIinQUs5w5gp4pW3mHbUg+StBX6281hLmPPEvQxGmk2pks6LWxXB5O/0e4W9DhlN40q26Ph6Arc3t5hlV/t6Wg6Yi+d543j9GdP/449ny1xA5Bwx3F9JwrqCelvHof/z42X7MFzjGfbEGXNW2ocbEg78jfJmgnoq/KUs7nfAiSY0EQyRkfguRYEERyxocgORYEkZzxIUiOBUEkZ3wgkmM+EMkxH4LkWBBE+HzHoUh8IJJKPhDhA5HU8+GIHYikBR+I8OFI6u1wxA5H7HQ8zIcdlMChSQLUwLWByT9zCdOrYZjmrQAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAEcklEQVR42u3dW24bSRAEQF6Ex/R1fFUt/GPAu9DCYotdVVkxyH+xs0LD1wz78Sg/nj9/yMt5bDmMGi5qaAJHfrAjmY7MhCN2OGJHBjlSOUT4SAEiHXOEj9QgUipE+EgNIkVChI+UIdKf4CM1iNQmB4gUJmeItCUHglQlZ4j0JAeClCRniDQkB4LUI2eIdCMHghTzOx+fH8r5HBEpJwdBawR9vP9YKYgams4QgYMSQS3hBFNKFPQx58gSxA5HZ4jYeWGeHM0X1G1uCx2NFdR/SksczRQ0ayzZiKYJmjuNVEejBGXUH4ZojqCwf92Y5UwQFPxeJmBpKXw2fJ7VGJFqrTRR0MJvu4cuuaWgtdfdTFx4P0GuAJzVQDNB+IzroZMgfCa20UYQPkM76SEIn7nNNBCEz+h+qgXhM72l3oLY6V9UqSB8AuqqE4RPRmlFgvCJqa6fIEZmtVchCJ+kDq8L8vwVVmMnQVxMbPKuIHzy+iSIoDGC8IlstYEgCkYXe0uQE1Bqt9WCzH96vVcEOQEFN1wqyOQDSn6/ICeg7NNQnSAz/5+WBlVNUNCzT6IgT2E3vyAtabtIEDtvukWeIHYIqlyN31G8X3uKoP5nums/50pQ3HWPl3+aPF3QoFelVXbOH22EoPKnsHJEhRsj3Gxgk6Brjso31SCo64vU/nbSBQXPrdu+UMMFFX4SVDK9hntBXfuLKYKqJtl2HzGC2jtqvgcdQY1flXR7yUPQqJNRfzu5gmZ9qfDfBzzFzuUpLBB0/tQzzg5BEYh6rneCoOZXlW2wc3MQ+wS91dHCO8i2CnoHop33IC4W9I2ONt/Ful7Q0HfqBG29DJ6g9Dt8YvgQRBBBU+8yzOAzWdCIu7deRjR9Fb7VyKqfoNz6A+L6IHF9EEEEEUQQQQQRJNsEeTu259OIiPvmpbB8gggiSCIFeSm05CuZrN9yladf4hSCCCIIInwIIihbEEQxbdtfzAmIINkpCKKMnu317AQ0WBBEAQ1fEeQ0FFxvtSCIpnd7S5DTUGqxDQRBNLrVi4IgiuyTIIImCYIor8lOgiCaWON1QU5DYR1WCIIoqb1+giCaVV2RIIhiSqsTBFFGXaWCIAooqrcgiPq3VC0Ioun9NBAE0ehmegiCaG4nbQRBNLSNToIgmthDM0EQjWugn6Dn323RtNNOw4W3FLQT0dAldxX0zNosLnilj1+Haq3xgE9nQc+v7J6baqfz0iYIinQUs5w5gp4pW3mHbUg+StBX6281hLmPPEvQxGmk2pks6LWxXB5O/0e4W9DhlN40q26Ph6Arc3t5hlV/t6Wg6Yi+d543j9GdP/449ny1xA5Bwx3F9JwrqCelvHof/z42X7MFzjGfbEGXNW2ocbEg78jfJmgnoq/KUs7nfAiSY0EQyRkfguRYEERyxocgORYEkZzxIUiOBUEkZ3wgkmM+EMkxH4LkWBBE+HzHoUh8IJJKPhDhA5HU8+GIHYikBR+I8OFI6u1wxA5H7HQ8zIcdlMChSQLUwLWByT9zCdOrYZjmrQAAAABJRU5ErkJggg==">
+<title>勤怠管理</title>
+<style>
+:root{
+  --green:#1D9E75;--green-light:#E1F5EE;--green-dark:#0F6E56;--green-mid:#5DCAA5;
+  --red-light:#FAECE7;--red-mid:#F0997B;--red-dark:#993C1D;
+  --blue:#185FA5;--blue-light:#E6F1FB;--blue-mid:#378ADD;
+  --amber-light:#FAEEDA;--amber:#BA7517;
+  --text:#1a1a1a;--text2:#666;--text3:#999;
+  --bg:#f5f5f3;--surface:#fff;--border:#e0ddd6;--border2:#ccc;
+  --radius:10px;--radius-lg:14px;
+  --safe-top:env(safe-area-inset-top);
+  --safe-bottom:env(safe-area-inset-bottom);
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --text:#f0ede6;--text2:#a8a49c;--text3:#666;
+    --bg:#181816;--surface:#242420;--border:#36342e;--border2:#4a4840;
+    --green-light:#0a2b1e;--red-light:#2b1208;--blue-light:#061e35;--amber-light:#2b1d06;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic UI',sans-serif;font-size:16px}
+body{display:flex;flex-direction:column;min-height:100dvh}
+
+/* Header */
+.app-header{
+  background:var(--surface);
+  border-bottom:0.5px solid var(--border);
+  padding:calc(var(--safe-top) + 12px) 16px 12px;
+  position:sticky;top:0;z-index:100;
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.app-title{font-size:17px;font-weight:600;letter-spacing:-.3px}
+.month-nav{display:flex;align-items:center;gap:4px}
+.nav-btn{
+  width:32px;height:32px;border-radius:50%;border:none;
+  background:var(--bg);color:var(--text);font-size:14px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.nav-btn:active{background:var(--border)}
+.month-text{font-size:15px;font-weight:500;min-width:80px;text-align:center}
+
+/* Content */
+.content{flex:1;padding:12px 12px calc(var(--safe-bottom) + 12px);max-width:600px;margin:0 auto;width:100%}
+
+/* Today punch card */
+.punch-card{
+  background:var(--surface);border:0.5px solid var(--border);
+  border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:12px;
+}
+.punch-date{font-size:12px;color:var(--text2);margin-bottom:10px}
+.punch-buttons{margin-bottom:10px}
+.punch-btn{
+  width:100%;padding:14px 8px;border-radius:var(--radius);border:none;
+  font-size:15px;font-weight:600;cursor:pointer;transition:transform .1s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.punch-btn:active{transform:scale(0.98)}
+.punch-btn-in{background:var(--green-light);color:var(--green-dark)}
+.punch-btn-out{background:var(--red-light);color:var(--red-dark)}
+.punch-btn-done{background:var(--bg);color:var(--text3);border:0.5px solid var(--border)}
+.punch-btn .icon{font-size:18px;line-height:1}
+.punch-btn .label{font-size:13px;font-weight:600}
+.punch-times{display:flex;gap:8px}
+.punch-time-chip{
+  flex:1;background:var(--bg);border-radius:8px;padding:6px 10px;
+  font-size:12px;color:var(--text2);text-align:center;
+}
+.punch-time-chip span{display:block;font-size:15px;font-weight:600;color:var(--text);margin-top:2px}
+.break-row{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border)}
+.break-row label{font-size:12px;color:var(--text2);flex:1}
+.break-row input{width:60px;padding:5px 8px;font-size:13px;border:0.5px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text);text-align:center}
+
+/* Summary */
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.stat-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 8px;text-align:center}
+.stat-card .s-label{font-size:10px;color:var(--text3);margin-bottom:4px}
+.stat-card .s-val{font-size:17px;font-weight:600;color:var(--text)}
+.stat-card .s-unit{font-size:10px;color:var(--text2)}
+
+/* Table card */
+.table-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{
+  background:var(--bg);padding:7px 4px;text-align:center;
+  font-size:10px;font-weight:600;color:var(--text2);
+  border-bottom:0.5px solid var(--border);position:sticky;top:0;
+}
+tbody tr{border-bottom:0.5px solid var(--border)}
+tbody tr:last-child{border-bottom:none}
+tbody tr.row-sat{background:#EAF3DE18}
+tbody tr.row-sun{background:#FAECE718}
+tbody tr.row-today{background:#E6F1FB30}
+td{padding:5px 3px;text-align:center;vertical-align:middle;color:var(--text)}
+.d-num{font-size:13px;font-weight:600}
+.d-dow{font-size:10px;color:var(--text2)}
+.d-dow.sat{color:#3B6D11}
+.d-dow.sun{color:#993C1D}
+.t-inp{
+  width:68px;padding:4px 3px;font-size:12px;
+  border:0.5px solid var(--border);border-radius:6px;
+  background:var(--bg);color:var(--text);text-align:center;
+}
+.t-inp:focus{outline:none;border-color:var(--blue-mid)}
+.brk-inp{
+  width:42px;padding:4px 2px;font-size:12px;
+  border:0.5px solid var(--border);border-radius:6px;
+  background:var(--bg);color:var(--text);text-align:center;
+}
+.w-cell{font-size:12px;font-weight:600;color:var(--text)}
+.ot-pill{font-size:10px;color:var(--blue);background:var(--blue-light);border-radius:4px;padding:1px 4px;white-space:nowrap}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin:0 auto}
+.dot-work{background:var(--green)}
+.dot-abs{background:#E24B4A}
+.dot-paid{background:var(--blue-mid)}
+.dot-special{background:var(--amber)}
+.dot-late{background:#EF9F27}
+.dot-early{background:#F0997B}
+
+/* Status selector overlay */
+.status-tap{cursor:pointer;font-size:10px;padding:3px 5px;border-radius:5px;border:0.5px solid var(--border);background:var(--bg);color:var(--text);min-width:36px;white-space:nowrap}
+
+/* Bottom actions */
+.bottom-actions{display:flex;gap:8px}
+.action-btn{
+  flex:1;padding:12px;border-radius:var(--radius);border:0.5px solid var(--border);
+  background:var(--surface);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;
+}
+.action-btn:active{background:var(--bg)}
+.action-btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.action-btn.primary:active{background:var(--green-dark)}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:calc(var(--safe-bottom) + 80px);left:50%;transform:translateX(-50%);
+  background:#1a1a1a;color:#fff;padding:9px 20px;border-radius:20px;
+  font-size:13px;white-space:nowrap;opacity:0;transition:opacity .25s;pointer-events:none;z-index:999;
+}
+.toast.show{opacity:1}
+
+/* Modal for status picker */
+.modal-bg{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;
+  align-items:flex-end;justify-content:center;
+}
+.modal-bg.open{display:flex}
+.modal-sheet{
+  background:var(--surface);border-radius:16px 16px 0 0;
+  padding:16px 16px calc(var(--safe-bottom)+16px);width:100%;max-width:400px;
+}
+.modal-title{font-size:13px;color:var(--text2);margin-bottom:12px;text-align:center}
+.status-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.status-option{
+  padding:12px;border-radius:var(--radius);border:0.5px solid var(--border);
+  background:var(--bg);color:var(--text);font-size:14px;font-weight:500;
+  cursor:pointer;text-align:center;
+}
+.status-option:active{background:var(--border)}
+.modal-cancel{
+  margin-top:8px;width:100%;padding:13px;border-radius:var(--radius);
+  border:none;background:var(--bg);color:var(--text2);font-size:15px;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-inner">
+    <span class="app-title">勤怠管理</span>
+    <div class="month-nav">
+      <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
+      <span class="month-text" id="monthText"></span>
+      <button class="nav-btn" onclick="changeMonth(1)">›</button>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+  <!-- Today punch -->
+  <div class="punch-card">
+    <div class="punch-date" id="todayLabel"></div>
+    <div class="punch-buttons">
+      <button class="punch-btn punch-btn-in" id="punchBtn" onclick="smartPunch()">
+        <span class="icon" id="punchIcon">▶</span>
+        <span class="label" id="punchLabel">出勤打刻</span>
+      </button>
+    </div>
+    <div class="punch-times">
+      <div class="punch-time-chip">出勤<span id="chipIn">—</span></div>
+      <div class="punch-time-chip">退勤<span id="chipOut">—</span></div>
+      <div class="punch-time-chip">勤務<span id="chipWork">—</span></div>
+    </div>
+    <div class="break-row">
+      <label>デフォルト休憩時間</label>
+      <input type="number" id="defBreakInp" value="30" min="0" max="180" onchange="defBreak=+this.value">
+      <span style="font-size:12px;color:var(--text2)">分</span>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>日</th><th>曜</th><th>区分</th><th>出勤</th><th>退勤</th><th>休憩</th><th>勤務</th><th>残業</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Actions -->
+  <div class="bottom-actions">
+    <button class="action-btn" onclick="clearMonth()">今月クリア</button>
+    <button class="action-btn primary" onclick="exportCSV()">CSVエクスポート</button>
+  </div>
+</div>
+
+<!-- Status picker modal -->
+<div class="modal-bg" id="modalBg" onclick="closeModal()">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-title">勤怠区分を選択</div>
+    <div class="status-options">
+      <button class="status-option" onclick="setStatusModal('1')">出勤</button>
+      <button class="status-option" onclick="setStatusModal('2')">欠勤</button>
+      <button class="status-option" onclick="setStatusModal('3')">遅刻</button>
+      <button class="status-option" onclick="setStatusModal('4')">早退</button>
+      <button class="status-option" onclick="setStatusModal('5')">有給休暇</button>
+      <button class="status-option" onclick="setStatusModal('6')">特別休暇</button>
+      <button class="status-option" onclick="setStatusModal('')">—（空白）</button>
+    </div>
+    <button class="modal-cancel" onclick="closeModal()">キャンセル</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DOWS=['日','月','火','水','木','金','土'];
+const STATUS_LABEL={'':'—','1':'出勤','2':'欠勤','3':'遅刻','4':'早退','5':'有給','6':'特休'};
+const STATUS_DOT={'1':'dot-work','2':'dot-abs','3':'dot-late','4':'dot-early','5':'dot-paid','6':'dot-special'};
+const HOL=['2025-01-01','2025-01-13','2025-02-11','2025-02-23','2025-03-20','2025-04-29','2025-05-03','2025-05-04','2025-05-05','2025-05-06','2025-07-21','2025-08-11','2025-09-15','2025-09-22','2025-09-23','2025-10-13','2025-11-03','2025-11-23','2025-11-24','2026-01-01','2026-01-12','2026-02-11','2026-02-23','2026-03-20','2026-04-29','2026-05-03','2026-05-04','2026-05-05','2026-05-06'];
+const WORK_IN=9*60+30, WORK_OUT=18*60;
+
+let now=new Date(), curY=now.getFullYear(), curM=now.getMonth()+1;
+let data={}, defBreak=30, modalDay=null;
+
+function sk(){return`kt_${curY}_${String(curM).padStart(2,'0')}`}
+function load(){try{data=JSON.parse(localStorage.getItem(sk())||'{}')}catch{data={}}}
+function row(d){if(!data[d])data[d]={s:'1',i:'',o:'',b:defBreak};return data[d]}
+function dim(y,m){return new Date(y,m,0).getDate()}
+function dstr(d){return`${curY}-${String(curM).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
+function toMin(t){if(!t)return null;const[h,m]=t.split(':').map(Number);return h*60+m}
+function fromMin(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+function calcWork(r){
+  const i=toMin(r.i),o=toMin(r.o);
+  if(i===null||o===null||o<=i)return{w:null,ot:null};
+  const brk=+r.b||0, w=o-i-brk, std=WORK_OUT-WORK_IN-brk, ot=Math.max(0,w-std);
+  return{w:Math.max(0,w),ot};
+}
+function fmtH(m){if(!m&&m!==0)return'';const h=Math.floor(m/60),mn=m%60;return mn?`${h}h${mn}m`:`${h}h`}
+
+function render(){
+  const today=new Date();
+  const isThisMonth=curY===today.getFullYear()&&curM===today.getMonth()+1;
+  document.getElementById('monthText').textContent=`${curY}年${curM}月`;
+  document.getElementById('todayLabel').textContent=
+    `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日（${DOWS[today.getDay()]}）`;
+
+  const days=dim(curY,curM);
+  let totalW=0,totalOt=0,wDays=0,absDays=0,paidDays=0;
+  let rows='';
+
+  for(let d=1;d<=days;d++){
+    const dw=new Date(curY,curM-1,d).getDay();
+    const ds=dstr(d);
+    const hol=HOL.includes(ds);
+    const r=row(d);
+    const{w,ot}=calcWork(r);
+    if(w){totalW+=w;if(r.s==='1')wDays++}
+    if(ot)totalOt+=ot;
+    if(r.s==='2')absDays++;
+    if(r.s==='5')paidDays++;
+
+    const isToday=isThisMonth&&d===today.getDate();
+    const trCls=isToday?'row-today':(dw===6?'row-sat':(dw===0||hol?'row-sun':''));
+    const dowCls=dw===6?'sat':(dw===0||hol?'sun':'');
+    const dotCls=STATUS_DOT[r.s]||'';
+
+    rows+=`<tr class="${trCls}">
+      <td><span class="d-num">${d}</span></td>
+      <td><span class="d-dow ${dowCls}">${DOWS[dw]}</span></td>
+      <td onclick="openModal(${d})" style="cursor:pointer">
+        ${dotCls?`<span class="status-dot ${dotCls}"></span>`:''}
+        <div style="font-size:9px;color:var(--text2);margin-top:2px">${STATUS_LABEL[r.s]||'—'}</div>
+      </td>
+      <td><input class="t-inp" type="time" value="${r.i}" onchange="setIn(${d},this.value)"></td>
+      <td><input class="t-inp" type="time" value="${r.o}" onchange="setOut(${d},this.value)"></td>
+      <td><input class="brk-inp" type="number" value="${r.b}" min="0" onchange="setBrk(${d},this.value)"></td>
+      <td class="w-cell">${w?fmtH(w):''}</td>
+      <td>${ot?`<span class="ot-pill">+${fmtH(ot)}</span>`:''}</td>
+    </tr>`;
+  }
+  document.getElementById('tbody').innerHTML=rows;
+
+  document.getElementById('summaryGrid').innerHTML=`
+    <div class="stat-card"><div class="s-label">出勤</div><div class="s-val">${wDays}<span class="s-unit">日</span></div></div>
+    <div class="stat-card"><div class="s-label">有給</div><div class="s-val">${paidDays}<span class="s-unit">日</span></div></div>
+    <div class="stat-card"><div class="s-label">総勤務</div><div class="s-val">${Math.floor(totalW/60)}<span class="s-unit">h</span>${totalW%60?`${totalW%60}<span class="s-unit">m</span>`:''}</div></div>
+    <div class="stat-card"><div class="s-label">残業</div><div class="s-val">${Math.floor(totalOt/60)}<span class="s-unit">h</span>${totalOt%60?`${totalOt%60}<span class="s-unit">m</span>`:''}</div></div>
+  `;
+
+  updateTodayChips(isThisMonth?today.getDate():null);
+}
+
+function updateTodayChips(d){
+  const btn=document.getElementById('punchBtn');
+  const icon=document.getElementById('punchIcon');
+  const lbl=document.getElementById('punchLabel');
+  if(!d){
+    document.getElementById('chipIn').textContent='—';
+    document.getElementById('chipOut').textContent='—';
+    document.getElementById('chipWork').textContent='—';
+    btn.className='punch-btn punch-btn-in';
+    icon.textContent='▶';lbl.textContent='出勤打刻';
+    return;
+  }
+  const r=row(d);
+  document.getElementById('chipIn').textContent=r.i||'—';
+  document.getElementById('chipOut').textContent=r.o||'—';
+  const{w}=calcWork(r);
+  document.getElementById('chipWork').textContent=w?fmtH(w):'—';
+  if(!r.i){
+    btn.className='punch-btn punch-btn-in';
+    icon.textContent='▶';lbl.textContent='出勤打刻';
+  } else if(!r.o){
+    btn.className='punch-btn punch-btn-out';
+    icon.textContent='■';lbl.textContent='退勤打刻';
+  } else {
+    btn.className='punch-btn punch-btn-done';
+    icon.textContent='✓';lbl.textContent='打刻済み';
+  }
+}
+
+function smartPunch(){
+  const t=new Date();
+  if(curY!==t.getFullYear()||curM!==t.getMonth()+1){toast('今月以外は打刻できません');return}
+  const r=row(t.getDate());
+  const time=fromMin(t.getHours()*60+t.getMinutes());
+  if(!r.i){
+    r.i=time;r.s='1';
+    save();render();toast('出勤打刻 '+time);
+  } else if(!r.o){
+    r.o=time;
+    save();render();toast('退勤打刻 '+time);
+  } else {
+    toast('本日は打刻済みです');
+  }
+}
+
+function setIn(d,v){row(d).i=v;save();render()}
+function setOut(d,v){row(d).o=v;save();render()}
+function setBrk(d,v){row(d).b=+v;save();render()}
+
+function openModal(d){modalDay=d;document.getElementById('modalBg').classList.add('open')}
+function closeModal(){document.getElementById('modalBg').classList.remove('open');modalDay=null}
+function setStatusModal(s){if(modalDay){row(modalDay).s=s;save();render();closeModal();}}
+
+function changeMonth(dir){
+  curM+=dir;if(curM>12){curM=1;curY++}if(curM<1){curM=12;curY--}
+  load();render();
+}
+
+function clearMonth(){
+  if(!confirm(`${curY}年${curM}月のデータをクリアしますか？`))return;
+  data={};save();render();toast('クリアしました');
+}
+
+function exportCSV(){
+  const days=dim(curY,curM);
+  let csv='\uFEFF日,曜日,区分,出勤,退勤,休憩(分),勤務時間(分),残業(分)\n';
+  for(let d=1;d<=days;d++){
+    const dw=new Date(curY,curM-1,d).getDay();
+    const r=row(d);const{w,ot}=calcWork(r);
+    csv+=`${d},${DOWS[dw]},${STATUS_LABEL[r.s]||''},${r.i||''},${r.o||''},${r.b||''},${w||''},${ot||''}\n`;
+  }
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download=`勤怠_${curY}${String(curM).padStart(2,'0')}.csv`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  toast('CSVを出力しました');
+}
+
+function saveToIDB(){
+  try{
+    const req=indexedDB.open('kintai_db',1);
+    req.onupgradeneeded=e=>e.target.result.createObjectStore('store');
+    req.onsuccess=e=>{
+      const db=e.target.result;
+      const tx=db.transaction('store','readwrite');
+      const st=tx.objectStore('store');
+      for(let i=0;i<localStorage.length;i++){
+        const k=localStorage.key(i);
+        if(k&&k.startsWith('kt_'))st.put(localStorage.getItem(k),k);
+      }
+    };
+  }catch(e){}
+}
+
+function init(){
+  try{
+    const req=indexedDB.open('kintai_db',1);
+    req.onupgradeneeded=e=>e.target.result.createObjectStore('store');
+    req.onsuccess=e=>{
+      const db=e.target.result;
+      const tx=db.transaction('store','readonly');
+      const st=tx.objectStore('store');
+      const allReq=st.getAllKeys();
+      allReq.onsuccess=()=>{
+        let pending=allReq.result.length;
+        if(pending===0){load();render();return;}
+        allReq.result.forEach(k=>{
+          const vReq=st.get(k);
+          vReq.onsuccess=()=>{
+            if(vReq.result&&!localStorage.getItem(k))localStorage.setItem(k,vReq.result);
+            pending--;
+            if(pending===0){load();render();}
+          };
+          vReq.onerror=()=>{pending--;if(pending===0){load();render();}};
+        });
+      };
+      allReq.onerror=()=>{load();render();};
+    };
+    req.onerror=()=>{load();render();};
+  }catch(e){load();render();}
+}
+
+function save(){
+  localStorage.setItem(sk(),JSON.stringify(data));
+  saveToIDB();
+}
+
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('show'),2200);
+}
+
+init();
+</script>
+</body>
+</html>
